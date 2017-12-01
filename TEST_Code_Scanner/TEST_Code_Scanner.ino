@@ -65,8 +65,8 @@ int randomData0, randomData1;
 unsigned long timePrevious;
 void setup()
 {
-  pinMode(16, OUTPUT);
-  pinMode(17, INPUT);
+  //pinMode(16, OUTPUT);
+  //pinMode(17, INPUT);
   //pinMode(28, OUTPUT);
   //digitalWrite(28, HIGH);
   delay(1000);

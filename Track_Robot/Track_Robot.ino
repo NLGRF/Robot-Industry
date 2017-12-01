@@ -25,16 +25,40 @@ void setup() {
   pinMode(rmotor, OUTPUT);
 
 }
-
+String stringKey;
+String key;
 void loop() {
+
+   
   if (CarSerial.available()) {
-    Serial.write(CarSerial.read());
+   // key = "";
+    key += ((char)CarSerial.read());
+    
+/*    String Barcode = "";
+    if (( (((char)key) >= '0') && (((char)key) <= '9') ) || ( (((char)key) >= 'A') && (((char)key) <= 'Z') ) || ( (((char)key) >= 'a') && (((char)key) <= 'z') ) || (((char)key) == '-') || (((char)key) == '*') ) {
+      // Serial.print((char)key);
+      Barcode += (char)key;
+      Serial.print(Barcode);
+
+    } else if ( (char)key == '\0') {
+      Serial.println();
+
+    } */
+    //Serial.println();
   }
-  
-  if (Serial.available()) {
-    CarSerial.write(Serial.read());
-  }
-  
+
+  /*  if (Serial.available()) {
+      CarSerial.println(Serial.read());
+    }
+  */
+
+//  String BC = key;
+  // Serial.println(BC);
+ if ( key == "8851021962745" ) {
+  Serial.println("Go to Location A");
+  key ="";
+ }
+
   bool lsensor = digitalRead(8);
   bool rsensor = digitalRead(11);
   if ((lsensor == HIGH) && (rsensor == HIGH))
@@ -78,5 +102,17 @@ void loop() {
     digitalWrite(lmotorb, LOW);
     digitalWrite(rmotorb, LOW);
     analogWrite(rmotor, 255);
+  }
+}
+
+void Char_toString(char key) {
+
+  if (key >= 32) {
+    stringKey = stringKey + String(key);
+  }
+  else {
+    Serial.println(stringKey);
+    stringKey = "";
+
   }
 }
