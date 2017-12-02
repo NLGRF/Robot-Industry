@@ -66,16 +66,32 @@ void KbdRptParser::OnKeyPressed(uint8_t key)
   */
   //Serial.print("Barcode: ");
   // static uint8_t count = 0;
-  String Barcode = "";
+  static String Barcode = "";
   if (( (((char)key) >= '0') && (((char)key) <= '9') ) || ( (((char)key) >= 'A') && (((char)key) <= 'Z') ) || ( (((char)key) >= 'a') && (((char)key) <= 'z') ) || (((char)key) == '-') || (((char)key) == '*') || ( (char)key == '\0')) {
     // Serial.print((char)key);
     Barcode += (char)key;
-    Serial.print(Barcode);
-    TX(Barcode);
+
+    // TX(Barcode);
   } else {
+    Serial.print(Barcode);
     Serial.println();
+    if ( Barcode == "8851959132364") {
+      TX('X');
+      Serial.println("Send X Finish");
+    }
+    if ( Barcode == "8851959132012") {
+      TX('Y');
+      Serial.println("Send Y Finish");
+    }
+    if ( Barcode == "8850228004616") {
+      TX('Z');
+      Serial.println("Send Z Finish");
+    }
+    //Serial.print(Barcode);
     // Serial.print("Barcode :\t");
+    Barcode = "";
   }
+
 
 };
 KbdRptParser Prs;
@@ -92,7 +108,7 @@ void setup()
   BTserial.begin(38400);
   //Serial.println("BTserial started at 38400");
   Serial.print("Plase Enter  Barcode  or ScanBarcode: ");
-  Serial.print(">");
+  Serial.println(">");
   if (Usb.Init() == -1) {
     Serial.println("OSC did not start.");
   }
@@ -124,11 +140,11 @@ void Char_toString(char key) {
 void loop()
 {
   Usb.Task();
-  if (Serial.available() > 0) {
-    Massenger = Serial.readString();
-    TX(Massenger);
-    Serial.println();
-  }
-
+  /* if(Serial.available() > 0) {
+     Massenger = Serial.readString();
+     TX(Massenger);
+     Serial.println();
+    }
+  */
 
 }
