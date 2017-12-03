@@ -5,6 +5,7 @@ byte Count = 0;
 // Position X
 
 void pX() {
+  
 
 
   Serial.println(Count);
@@ -56,7 +57,7 @@ void pX() {
     key = "";
     Count++;
     break;
-  }
+  } // ออกจาก px() c = 2
   // Count++;
   Serial.println(Count);
   // key = "";
@@ -65,19 +66,20 @@ void pX() {
 }
 
 void toStop() {
-  while ((digitalRead(10) == LOW) && (digitalRead(9) == LOW)) {
-    //Stop
-    digitalWrite(lmotorf, LOW);
-    digitalWrite(rmotorf, 0);
-    analogWrite(lmotor, 0);
-    digitalWrite(lmotorb, 0);
-    digitalWrite(rmotorb, LOW);
-    analogWrite(rmotor, 0);
-    Count++;
-    break;
-  }
+//  while ((digitalRead(10) == LOW) && (digitalRead(9) == LOW)) {
+//    //Stop
+//    digitalWrite(lmotorf, LOW);
+//    digitalWrite(rmotorf, 0);
+//    analogWrite(lmotor, 0);
+//    digitalWrite(lmotorb, 0);
+//    digitalWrite(rmotorb, LOW);
+//    analogWrite(rmotor, 0);
+//    Count++;
+//    break;
+//  }
 
   if (digitalRead(8) == 1 && Count == 2) {
+    Serial.print("IF");
     digitalWrite(lmotorf, 1);
     digitalWrite(rmotorf, 1);
     analogWrite(lmotor, 100);
@@ -86,7 +88,7 @@ void toStop() {
     analogWrite(rmotor, 100);
     delay(500);
   }
-  
+  /*
     if (digitalRead(8) == 1 && Count == 3) {
     digitalWrite(lmotorf, 1);
     digitalWrite(rmotorf, 1);
@@ -106,6 +108,6 @@ void toStop() {
     analogWrite(rmotor, 100);
     delay(500);
   }
-  
+  */
 }
 

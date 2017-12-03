@@ -51,7 +51,7 @@ void loop() {
 
   //  String BC = key;
   //Serial.println(BC);
-
+/*
   // จากจุด Scan ไปจุดส่งของ-วางของใส่รถแล้ว
   if (digitalRead(8) == 0 && Count == 0) {
     Serial.println("Transport");
@@ -66,10 +66,12 @@ void loop() {
     analogWrite(rmotor, 100);
     delay(1000);
   }
-
+*/
   if ( key == "X" ) {
-    
+    pX();
+   toStop();
   }
+  
 /*
   if ( key == "Y" ) {
     Serial.println(Count);
@@ -179,6 +181,7 @@ void loop() {
     digitalWrite(rmotorb, LOW);
     analogWrite(rmotor, 100);
   }
+  
   else if ((lsensor == LOW) && (rsensor == LOW)) {
     //Stop
     digitalWrite(lmotorf, LOW);
