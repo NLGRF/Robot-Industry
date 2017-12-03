@@ -1,19 +1,7 @@
 #include <SoftwareSerial.h>
+#include "Position.h"
 
 SoftwareSerial CarSerial(12, 13); // RX, TX
-
-#define lmotorf 2
-#define lmotorb 4
-#define rmotorf 5
-#define rmotorb 7
-
-//HIGH white
-//LOW black
-#define lmotor 3
-#define rmotor 6
-byte Count = 0;
-// Sw
-// #define Switch 8
 
 void setup() {
   Serial.begin(9600);
@@ -30,14 +18,13 @@ void setup() {
   pinMode(rmotor, OUTPUT);
 
 }
-String stringKey;
-String key;
+
 void loop() {
 
 
-  bool lsensor = digitalRead(10);
-  bool rsensor = digitalRead(9);
-  bool Switch = digitalRead(8);
+   bool lsensor = digitalRead(10);
+   bool rsensor = digitalRead(9);
+  // bool Switch = digitalRead(8);
 
 
   if (CarSerial.available()) {
@@ -66,7 +53,7 @@ void loop() {
   //Serial.println(BC);
 
   // จากจุด Scan ไปจุดส่งของ-วางของใส่รถแล้ว
-  if (Switch == 0 && Count == 0) {
+  if (digitalRead(8) == 0 && Count == 0) {
     Serial.println("Transport");
     Serial.println(Count);
     //both sensors on white
@@ -80,63 +67,10 @@ void loop() {
     delay(1000);
   }
 
-
   if ( key == "X" ) {
-    Serial.println(Count);
-    Serial.println("Go to Location X");
-    if (( Count == 0 ) || ( Count == 1)){
-    Count++;
-    }
-    Serial.println(Count);
-    /*
-      // ถึง x  แต่ยังไม่หยิบของออก
-      while (Switch == 0 && Count == 1) {
-
-      }
-    */
-
-    // ถึง x  และหยิบของออกแล้ว
-    if (Switch == 0 && Count == 1) {
-      Serial.println("X");
-      //both sensors on white
-      // go forward
-      digitalWrite(lmotorf, 0);
-      digitalWrite(rmotorf, 0);
-      analogWrite(lmotor, 100);
-      digitalWrite(lmotorb, LOW);
-      digitalWrite(rmotorb, LOW);
-      analogWrite(rmotor, 100);
-      delay(500);
-      //       Count++;
-      //       Serial.println(Count);
-    }
-/*
-    while (Switch == 0 && Count == 2){
-      Serial.println("Test");
-    }
-*/    
-    while (Switch == 1 && Count == 1) {
-       Serial.println("Go  X to Stop");
-      //both sensors on white
-      // go forward
-      digitalWrite(lmotorf, 1);
-      digitalWrite(rmotorf, 1);
-      analogWrite(lmotor, 100);
-      digitalWrite(lmotorb, LOW);
-      digitalWrite(rmotorb, LOW);
-      analogWrite(rmotor, 100);
-      delay(500);
-      //       Count++;
-      //       Serial.println(Count);
-      key = "";
-      break;
-    }
-    // Count++;
-    Serial.println(Count);
-   // key = "";
-    // Count = 0;
+    
   }
-
+/*
   if ( key == "Y" ) {
     Serial.println(Count);
 
@@ -202,7 +136,7 @@ void loop() {
     Count = 0;
 
   }
-
+*/
   if ((lsensor == HIGH) && (rsensor == HIGH))
   {
     //both sensors on white
